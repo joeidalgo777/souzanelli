@@ -3,364 +3,842 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Souzanelli | Pedido Online</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <title>🍦 Souzanelli | Pedido Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gelo: #e0f7fa;
-            --azul-frio: #00daff;
-            --texto: #2c3e50;
-            --shadow-gelo: 0 0 15px #fff, 0 0 25px var(--azul-frio);
+            --gelo: #e8f8ff;
+            --azul-frio: #00c8f0;
+            --azul-escuro: #0096c7;
+            --rosa: #ff6b9d;
+            --amarelo: #ffca3a;
+            --verde: #06d6a0;
+            --texto: #1e2d3d;
+            --texto-leve: #6b7e8f;
+            --branco: #ffffff;
+            --sombra: 0 8px 30px rgba(0,150,199,0.12);
+            --radius: 20px;
         }
+
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
-            font-family: 'Fredoka', sans-serif;
-            background-color: var(--gelo);
+            font-family: 'Nunito', sans-serif;
+            background: var(--gelo);
             color: var(--texto);
-            padding-bottom: 200px;
+            min-height: 100vh;
+            padding-bottom: 260px;
+            position: relative;
         }
 
+        /* Fundo decorativo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -100px; right: -100px;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(0,200,240,0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 200px; left: -80px;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(255,107,157,0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== HEADER ===== */
         header {
-            background: white;
-            padding: 30px 20px;
+            background: var(--branco);
+            padding: 28px 20px 24px;
             text-align: center;
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 6px 30px rgba(0,150,199,0.1);
+            position: relative;
+            z-index: 10;
         }
 
-        .logo { font-size: 3rem; font-weight: 600; text-shadow: var(--shadow-gelo); margin-bottom: 5px; }
-        .logo span:nth-child(1) { color: #FF595E; } .logo span:nth-child(2) { color: #FF924C; }
-        .logo span:nth-child(3) { color: #FFCA3A; } .logo span:nth-child(4) { color: #8AC926; }
-        .logo span:nth-child(5) { color: #1982C4; } .logo span:nth-child(6) { color: #6A4C93; }
-        .logo span:nth-child(7) { color: #FF595E; } .logo span:nth-child(8) { color: #FF924C; }
-        .logo span:nth-child(9) { color: #FFCA3A; } .logo span:nth-child(10) { color: #8AC926; }
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+
+        .logo-icon {
+            font-size: 2.8rem;
+            animation: balance 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes balance {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .logo {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .logo span:nth-child(1)  { color: #FF595E; }
+        .logo span:nth-child(2)  { color: #FF924C; }
+        .logo span:nth-child(3)  { color: #FFCA3A; }
+        .logo span:nth-child(4)  { color: #8AC926; }
+        .logo span:nth-child(5)  { color: #1982C4; }
+        .logo span:nth-child(6)  { color: #6A4C93; }
+        .logo span:nth-child(7)  { color: #FF595E; }
+        .logo span:nth-child(8)  { color: #FF924C; }
+        .logo span:nth-child(9)  { color: #FFCA3A; }
+        .logo span:nth-child(10) { color: #8AC926; }
+
+        .tagline {
+            font-size: 0.85rem;
+            color: var(--texto-leve);
+            margin-bottom: 14px;
+            letter-spacing: 0.5px;
+        }
 
         .info-box {
-            background: #f8fdff;
-            margin: 15px auto;
-            padding: 15px;
-            border-radius: 20px;
-            max-width: 500px;
-            font-size: 0.9rem;
-            line-height: 1.4;
-            border: 1px dashed var(--azul-frio);
+            background: linear-gradient(135deg, #f0fbff, #e8f4fd);
+            margin: 0 auto;
+            padding: 14px 18px;
+            border-radius: 16px;
+            max-width: 460px;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            border: 1.5px dashed rgba(0,200,240,0.4);
         }
-
-        .info-box a { color: #0077b6; text-decoration: none; font-weight: 600; }
+        .info-box a { color: var(--azul-escuro); text-decoration: none; font-weight: 700; }
+        .info-box a:hover { text-decoration: underline; }
 
         .status-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 16px;
+            border-radius: 30px;
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-top: 10px;
+            transition: all 0.3s;
         }
-        .open { background: #d4edda; color: #155724; }
-        .closed { background: #f8d7da; color: #721c24; }
+        .open  { background: #d4f5e9; color: #0a7d52; }
+        .closed { background: #ffe0e6; color: #c0124a; }
 
-        .container { max-width: 600px; margin: 20px auto; padding: 10px; }
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 14px;
+            position: relative;
+            z-index: 1;
+        }
 
-        .category-item { background: white; margin-bottom: 15px; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .section-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--azul-escuro);
+            margin: 22px 0 10px 4px;
+            opacity: 0.7;
+        }
 
-        .category-header { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 1.2rem; font-weight: 600; }
-        .category-header::after { content: '▼'; font-size: 0.8rem; transition: 0.3s; color: var(--azul-frio); }
-        .active .category-header::after { transform: rotate(180deg); }
+        /* ===== CATEGORIAS ===== */
+        .category-item {
+            background: var(--branco);
+            margin-bottom: 12px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            transition: box-shadow 0.3s;
+        }
+        .category-item:hover { box-shadow: 0 10px 40px rgba(0,150,199,0.18); }
 
-        .flavor-list { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #fdfdfd; }
-        .active .flavor-list { max-height: 800px; }
-
-        .flavor-item {
-            padding: 15px 20px;
-            border-top: 1px solid #f0f0f0;
+        .category-header {
+            padding: 18px 20px;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .category-header:hover { background: #f7fdff; }
+
+        .cat-left { display: flex; align-items: center; gap: 10px; }
+        .cat-badge {
+            background: var(--gelo);
+            border: 1.5px solid rgba(0,200,240,0.3);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--azul-escuro);
+            min-width: 24px;
+            text-align: center;
         }
 
-        .flavor-info { display: flex; align-items: center; gap: 10px; }
-        .flavor-emoji { font-size: 1.5rem; }
-        .flavor-details { display: flex; flex-direction: column; }
-        .flavor-name { font-weight: 600; }
-        .flavor-price { font-size: 0.9rem; color: #888; }
-
-        .controls { display: flex; align-items: center; gap: 15px; }
-        .btn-qty {
-            width: 32px; height: 32px; border-radius: 50%; border: none;
-            background: var(--gelo); color: var(--texto);
-            font-size: 1.2rem; font-weight: bold; cursor: pointer;
+        .cat-arrow {
+            width: 26px; height: 26px;
+            background: var(--gelo);
+            border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem;
+            color: var(--azul-frio);
+            transition: transform 0.3s, background 0.3s;
+            flex-shrink: 0;
         }
-        .qty { font-weight: 600; min-width: 20px; text-align: center; }
+        .active .cat-arrow { transform: rotate(180deg); background: var(--azul-frio); color: white; }
 
-        .footer-cart {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: white; padding: 15px;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
-            display: flex; flex-direction: column; align-items: center; gap: 10px;
-            z-index: 1000;
+        .flavor-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+        .active .flavor-list { max-height: 2000px; }
+
+        /* ===== ITENS ===== */
+        .flavor-item {
+            padding: 14px 20px;
+            border-top: 1px solid #f0f5f8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        .flavor-item:hover { background: #fafeff; }
+        .flavor-item.selected { background: linear-gradient(90deg, #f0fbff, #fafeff); }
+
+        .flavor-info { display: flex; align-items: center; gap: 12px; }
+        .flavor-emoji {
+            font-size: 1.6rem;
+            width: 42px; height: 42px;
+            background: var(--gelo);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+        .flavor-item:hover .flavor-emoji { transform: scale(1.1); }
+
+        .flavor-details { display: flex; flex-direction: column; }
+        .flavor-name { font-weight: 700; font-size: 0.95rem; }
+        .flavor-desc { font-size: 0.78rem; color: var(--texto-leve); margin-top: 1px; }
+        .flavor-price {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--azul-escuro);
+            margin-top: 2px;
         }
 
-        .payment-box { width: 100%; max-width: 400px; margin-bottom: 5px; }
-        .payment-box select {
-            width: 100%; padding: 10px; border-radius: 10px;
-            border: 2px solid var(--gelo); font-family: 'Fredoka'; font-size: 1rem;
+        /* ===== CONTROLES ===== */
+        .controls { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+        .btn-qty {
+            width: 34px; height: 34px;
+            border-radius: 50%; border: none;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.15s, background 0.2s;
+            flex-shrink: 0;
+        }
+        .btn-minus {
+            background: #f0f5f8;
+            color: var(--texto-leve);
+        }
+        .btn-minus:hover { background: #e0eaef; transform: scale(1.1); }
+        .btn-plus {
+            background: var(--azul-frio);
+            color: white;
+        }
+        .btn-plus:hover { background: var(--azul-escuro); transform: scale(1.1); }
+        .btn-plus:active { transform: scale(0.95); }
+
+        .qty {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            min-width: 22px;
+            text-align: center;
+            color: var(--texto);
+            transition: transform 0.15s;
+        }
+        .qty.bump { animation: bump 0.2s ease-out; }
+        @keyframes bump {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
+
+        /* ===== CAMPO DE NOME ===== */
+        .customer-box {
+            background: var(--branco);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            box-shadow: var(--sombra);
+            margin-bottom: 12px;
+        }
+        .customer-box label {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--texto-leve);
+            display: block;
+            margin-bottom: 8px;
+        }
+        .customer-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 2px solid #e0eff7;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem;
             outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #f8fcff;
+            color: var(--texto);
+        }
+        .customer-box input:focus {
+            border-color: var(--azul-frio);
+            box-shadow: 0 0 0 3px rgba(0,200,240,0.12);
+        }
+        .customer-box input::placeholder { color: #b0c4cf; }
+
+        /* ===== FOOTER CART ===== */
+        .footer-cart {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: white;
+            padding: 14px 16px 20px;
+            box-shadow: 0 -8px 40px rgba(0,0,0,0.1);
+            z-index: 1000;
+            border-top-left-radius: 28px;
+            border-top-right-radius: 28px;
         }
 
-        .total-info { font-size: 1.1rem; font-weight: 600; }
+        .cart-summary {
+            max-width: 420px;
+            margin: 0 auto 10px;
+            padding: 10px 14px;
+            background: var(--gelo);
+            border-radius: 14px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .cart-empty-msg {
+            font-size: 0.82rem;
+            color: var(--texto-leve);
+            width: 100%;
+            text-align: center;
+        }
+        .cart-chip {
+            background: white;
+            border: 1.5px solid rgba(0,200,240,0.3);
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--texto);
+            white-space: nowrap;
+            animation: fadeIn 0.2s ease-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+
+        .footer-bottom {
+            max-width: 420px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .payment-select {
+            flex: 1;
+            padding: 11px 14px;
+            border-radius: 12px;
+            border: 2px solid #e0eff7;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            outline: none;
+            background: #f8fcff;
+            color: var(--texto);
+            transition: border-color 0.2s;
+            cursor: pointer;
+        }
+        .payment-select:focus { border-color: var(--azul-frio); }
+
+        .total-pill {
+            background: var(--gelo);
+            border: 2px solid rgba(0,200,240,0.3);
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--texto);
+            white-space: nowrap;
+        }
+        .total-pill .valor {
+            color: var(--azul-escuro);
+            font-size: 1.1rem;
+        }
 
         .btn-send {
-            background: #25d366; color: white; padding: 15px 30px;
-            border-radius: 50px; text-decoration: none; font-weight: 600;
-            width: 90%; max-width: 400px; text-align: center;
-            display: flex; justify-content: center; align-items: center; gap: 10px;
+            background: linear-gradient(135deg, #25d366, #1aad52);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.05rem;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.35);
+            letter-spacing: 0.3px;
+        }
+        .btn-send:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
+        .btn-send:active { transform: translateY(0); }
+        .btn-send.disabled {
+            background: linear-gradient(135deg, #ccc, #bbb);
+            box-shadow: none;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            top: 20px; left: 50%;
+            transform: translateX(-50%) translateY(-80px);
+            background: #1e2d3d;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 9999;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            white-space: nowrap;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* Animação de entrada dos cards */
+        .category-item {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.4s ease-out forwards;
+        }
+        .category-item:nth-child(1) { animation-delay: 0.05s; }
+        .category-item:nth-child(2) { animation-delay: 0.12s; }
+        .category-item:nth-child(3) { animation-delay: 0.19s; }
+        .category-item:nth-child(4) { animation-delay: 0.26s; }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .customer-box {
+            opacity: 0;
+            animation: slideUp 0.4s ease-out 0.0s forwards;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">
-        <span>S</span><span>o</span><span>u</span><span>z</span><span>a</span><span>n</span><span>e</span><span>l</span><span>l</span><span>i</span>
+    <div class="logo-wrapper">
+        <span class="logo-icon">🍦</span>
+        <div class="logo">
+            <span>S</span><span>o</span><span>u</span><span>z</span><span>a</span><span>n</span><span>e</span><span>l</span><span>l</span><span>i</span>
+        </div>
     </div>
-    
+    <div class="tagline">Picolés & Gelados Artesanais 🧊</div>
     <div class="info-box">
-        📍 <a href="https://www.google.com/maps/search/?api=1&query=R.+Sen.+Feijó,+55+-+Vila+Operaria,+Biritiba+Mirim+-+SP" target="_blank">R. Sen. Feijó, 55 - Biritiba Mirim - SP</a><br>
-        🕒 Seg. a Dom. das 09h às 18h<br>
-        📱 <a href="https://wa.me/5511971819948">Dúvidas? Chame no WhatsApp</a>
+        📍 <a href="https://www.google.com/maps/search/Sorvetes+Souzanelli+R.+Sen.+Feij%C3%B3+55+Vila+Operaria+Biritiba+Mirim+SP" target="_blank">R. Sen. Feijó, 55 – Biritiba Mirim / SP</a><br>
+        🕒 Seg. a Dom. das 09h às 18h &nbsp;·&nbsp; 📱 <a href="https://wa.me/5511971819948">Dúvidas? WhatsApp</a>
         <br>
         <div id="shop-status" class="status-badge">Verificando horário...</div>
     </div>
 </header>
 
 <div class="container">
+
+    <p class="section-title">Identificação</p>
+
+    <div class="customer-box">
+        <label for="customer-name">👤 Seu nome (para o pedido)</label>
+        <input type="text" id="customer-name" placeholder="Ex: Maria Silva" autocomplete="name" />
+    </div>
+
+    <p class="section-title">Cardápio</p>
+
+    <!-- Picolés Artesanais -->
     <div class="category-item">
-        <div class="category-header" onclick="toggleMenu(this)">🍦 Picolés Artesanais</div>
+        <div class="category-header" onclick="toggleMenu(this)">
+            <div class="cat-left">
+                🍦 Picolés Artesanais
+                <span class="cat-badge" id="badge-picoles">R$ 6</span>
+            </div>
+            <div class="cat-arrow">▼</div>
+        </div>
         <div class="flavor-list">
             <div class="flavor-item" data-name="Picolé de Limão" data-emoji="🍋" data-price="6.00">
                 <div class="flavor-info">
-                    <span class="flavor-emoji">🍋</span>
-                    <div class="flavor-details"><span class="flavor-name">Limão</span><span class="flavor-price">R$ 6,00</span></div>
+                    <div class="flavor-emoji">🍋</div>
+                    <div class="flavor-details">
+                        <span class="flavor-name">Limão</span>
+                        <span class="flavor-desc">Refrescante e azedinho</span>
+                        <span class="flavor-price">R$ 6,00</span>
+                    </div>
                 </div>
                 <div class="controls">
-                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <button class="btn-qty btn-minus" onclick="changeQty(this, -1)">−</button>
                     <span class="qty">0</span>
-                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                    <button class="btn-qty btn-plus" onclick="changeQty(this, 1)">+</button>
                 </div>
             </div>
             <div class="flavor-item" data-name="Picolé de Morango" data-emoji="🍓" data-price="6.00">
                 <div class="flavor-info">
-                    <span class="flavor-emoji">🍓</span>
-                    <div class="flavor-details"><span class="flavor-name">Morango</span><span class="flavor-price">R$ 6,00</span></div>
+                    <div class="flavor-emoji">🍓</div>
+                    <div class="flavor-details">
+                        <span class="flavor-name">Morango</span>
+                        <span class="flavor-desc">Docinho e frutado</span>
+                        <span class="flavor-price">R$ 6,00</span>
+                    </div>
                 </div>
                 <div class="controls">
-                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <button class="btn-qty btn-minus" onclick="changeQty(this, -1)">−</button>
                     <span class="qty">0</span>
-                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                    <button class="btn-qty btn-plus" onclick="changeQty(this, 1)">+</button>
                 </div>
             </div>
-            <div class="flavor-item" data-name="Picolé de Maracujá" data-emoji="🟡" data-price="6.00">
+            <div class="flavor-item" data-name="Picolé de Maracujá" data-emoji="🌼" data-price="6.00">
                 <div class="flavor-info">
-                    <span class="flavor-emoji">🟡</span>
-                    <div class="flavor-details"><span class="flavor-name">Maracujá</span><span class="flavor-price">R$ 6,00</span></div>
+                    <div class="flavor-emoji">🌼</div>
+                    <div class="flavor-details">
+                        <span class="flavor-name">Maracujá</span>
+                        <span class="flavor-desc">Tropical e equilibrado</span>
+                        <span class="flavor-price">R$ 6,00</span>
+                    </div>
                 </div>
                 <div class="controls">
-                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <button class="btn-qty btn-minus" onclick="changeQty(this, -1)">−</button>
                     <span class="qty">0</span>
-                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                    <button class="btn-qty btn-plus" onclick="changeQty(this, 1)">+</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Gelos Saborizados -->
     <div class="category-item">
-        <div class="category-header" onclick="toggleMenu(this)">🧊 Gelos Saborizados</div>
+        <div class="category-header" onclick="toggleMenu(this)">
+            <div class="cat-left">
+                🧊 Gelos Saborizados
+                <span class="cat-badge">R$ 4</span>
+            </div>
+            <div class="cat-arrow">▼</div>
+        </div>
         <div class="flavor-list">
-            <div class="flavor-item" data-name="Gelo de Limão" data-emoji="🍋" data-price="4.00">
+            <div class="flavor-item" data-name="Gelo Saborizado de Limão" data-emoji="🍋" data-price="4.00">
                 <div class="flavor-info">
-                    <span class="flavor-emoji">🍋</span>
-                    <div class="flavor-details"><span class="flavor-name">Limão</span><span class="flavor-price">R$ 4,00</span></div>
+                    <div class="flavor-emoji">🍋</div>
+                    <div class="flavor-details">
+                        <span class="flavor-name">Limão</span>
+                        <span class="flavor-desc">Geladinho e azedinho</span>
+                        <span class="flavor-price">R$ 4,00</span>
+                    </div>
                 </div>
                 <div class="controls">
-                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <button class="btn-qty btn-minus" onclick="changeQty(this, -1)">−</button>
                     <span class="qty">0</span>
-                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                    <button class="btn-qty btn-plus" onclick="changeQty(this, 1)">+</button>
                 </div>
             </div>
-            <div class="flavor-item" data-name="Gelo de Morango" data-emoji="🍓" data-price="4.00">
+            <div class="flavor-item" data-name="Gelo Saborizado de Morango" data-emoji="🍓" data-price="4.00">
                 <div class="flavor-info">
-                    <span class="flavor-emoji">🍓</span>
-                    <div class="flavor-details"><span class="flavor-name">Morango</span><span class="flavor-price">R$ 4,00</span></div>
+                    <div class="flavor-emoji">🍓</div>
+                    <div class="flavor-details">
+                        <span class="flavor-name">Morango</span>
+                        <span class="flavor-desc">Gelado e frutado</span>
+                        <span class="flavor-price">R$ 4,00</span>
+                    </div>
                 </div>
                 <div class="controls">
-                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <button class="btn-qty btn-minus" onclick="changeQty(this, -1)">−</button>
                     <span class="qty">0</span>
-                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                    <button class="btn-qty btn-plus" onclick="changeQty(this, 1)">+</button>
                 </div>
             </div>
-            <div class="flavor-item" data-name="Gelo de Maracujá" data-emoji="🟡" data-price="4.00">
+            <div class="flavor-item" data-name="Gelo Saborizado de Maracujá" data-emoji="🌼" data-price="4.00">
                 <div class="flavor-info">
-                    <span class="flavor-emoji">🟡</span>
-                    <div class="flavor-details"><span class="flavor-name">Maracujá</span><span class="flavor-price">R$ 4,00</span></div>
+                    <div class="flavor-emoji">🌼</div>
+                    <div class="flavor-details">
+                        <span class="flavor-name">Maracujá</span>
+                        <span class="flavor-desc">Tropical e refrescante</span>
+                        <span class="flavor-price">R$ 4,00</span>
+                    </div>
                 </div>
                 <div class="controls">
-                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <button class="btn-qty btn-minus" onclick="changeQty(this, -1)">−</button>
                     <span class="qty">0</span>
-                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                    <button class="btn-qty btn-plus" onclick="changeQty(this, 1)">+</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Cremosinho -->
     <div class="category-item">
-        <div class="category-header" onclick="toggleMenu(this)">😋 Cremosinho</div>
+        <div class="category-header" onclick="toggleMenu(this)">
+            <div class="cat-left">
+                😋 Cremosinho
+                <span class="cat-badge">R$ 3,50</span>
+            </div>
+            <div class="cat-arrow">▼</div>
+        </div>
         <div class="flavor-list">
             <div class="flavor-item" data-name="Cremosinho de Limão" data-emoji="🍋" data-price="3.50">
                 <div class="flavor-info">
-                    <span class="flavor-emoji">🍋</span>
-                    <div class="flavor-details"><span class="flavor-name">Limão</span><span class="flavor-price">R$ 3,50</span></div>
+                    <div class="flavor-emoji">🍋</div>
+                    <div class="flavor-details">
+                        <span class="flavor-name">Limão</span>
+                        <span class="flavor-desc">Cremoso e refrescante</span>
+                        <span class="flavor-price">R$ 3,50</span>
+                    </div>
                 </div>
                 <div class="controls">
-                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <button class="btn-qty btn-minus" onclick="changeQty(this, -1)">−</button>
                     <span class="qty">0</span>
-                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                    <button class="btn-qty btn-plus" onclick="changeQty(this, 1)">+</button>
                 </div>
             </div>
             <div class="flavor-item" data-name="Cremosinho de Morango" data-emoji="🍓" data-price="3.50">
                 <div class="flavor-info">
-                    <span class="flavor-emoji">🍓</span>
-                    <div class="flavor-details"><span class="flavor-name">Morango</span><span class="flavor-price">R$ 3,50</span></div>
+                    <div class="flavor-emoji">🍓</div>
+                    <div class="flavor-details">
+                        <span class="flavor-name">Morango</span>
+                        <span class="flavor-desc">Cremoso e frutado</span>
+                        <span class="flavor-price">R$ 3,50</span>
+                    </div>
                 </div>
                 <div class="controls">
-                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <button class="btn-qty btn-minus" onclick="changeQty(this, -1)">−</button>
                     <span class="qty">0</span>
-                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                    <button class="btn-qty btn-plus" onclick="changeQty(this, 1)">+</button>
                 </div>
             </div>
-            <div class="flavor-item" data-name="Cremosinho de Maracujá" data-emoji="🟡" data-price="3.50">
+            <div class="flavor-item" data-name="Cremosinho de Maracujá" data-emoji="🌼" data-price="3.50">
                 <div class="flavor-info">
-                    <span class="flavor-emoji">🟡</span>
-                    <div class="flavor-details"><span class="flavor-name">Maracujá</span><span class="flavor-price">R$ 3,50</span></div>
+                    <div class="flavor-emoji">🌼</div>
+                    <div class="flavor-details">
+                        <span class="flavor-name">Maracujá</span>
+                        <span class="flavor-desc">Cremoso e tropical</span>
+                        <span class="flavor-price">R$ 3,50</span>
+                    </div>
                 </div>
                 <div class="controls">
-                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <button class="btn-qty btn-minus" onclick="changeQty(this, -1)">−</button>
                     <span class="qty">0</span>
-                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                    <button class="btn-qty btn-plus" onclick="changeQty(this, 1)">+</button>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
+<!-- FOOTER CARRINHO -->
 <div class="footer-cart">
-    <div class="payment-box">
-        <label style="font-size: 0.8rem; font-weight: 600; margin-left: 5px;">Forma de Pagamento:</label>
-        <select id="payment-method">
-            <option value="Pix">Pix (Leandro S. Soares)</option>
-            <option value="Dinheiro">Dinheiro (Levar troco?)</option>
-            <option value="Cartão">Cartão (Maquininha)</option>
-        </select>
+    <div class="cart-summary" id="cart-summary">
+        <span class="cart-empty-msg">Nenhum item selecionado ainda 🛒</span>
     </div>
-    <div class="total-info">Total: R$ <span id="total-value">0,00</span></div>
-    <a href="#" class="btn-send" onclick="sendWhatsApp()">
-        Enviar Pedido (WhatsApp) 📱
-    </a>
+    <div class="footer-bottom">
+        <div class="footer-row">
+            <select class="payment-select" id="payment-method">
+                <option value="Pix">💸 Pix — Leandro S. Soares</option>
+                <option value="Dinheiro">💵 Dinheiro (levar troco?)</option>
+                <option value="Cartão">💳 Cartão (maquininha)</option>
+            </select>
+            <div class="total-pill">Total: <span class="valor" id="total-value">R$ 0,00</span></div>
+        </div>
+        <button class="btn-send disabled" id="btn-send" onclick="sendWhatsApp()">
+            📱 Enviar Pedido pelo WhatsApp
+        </button>
+    </div>
 </div>
+
+<!-- Toast de feedback -->
+<div class="toast" id="toast"></div>
 
 <script>
     let cart = {};
 
-    // Verifica horário de funcionamento
+    // ===== Status do horário =====
     function checkStatus() {
         const now = new Date();
         const hour = now.getHours();
         const badge = document.getElementById('shop-status');
-        
         if (hour >= 9 && hour < 18) {
-            badge.innerText = "Estamos Abertos! ✅";
+            badge.innerText = "✅ Estamos Abertos agora!";
             badge.className = "status-badge open";
             return true;
         } else {
-            badge.innerText = "Fechado no momento ❌";
+            badge.innerText = "❌ Fechado no momento";
             badge.className = "status-badge closed";
             return false;
         }
     }
-
     checkStatus();
 
+    // ===== Accordion =====
     function toggleMenu(header) {
         header.parentElement.classList.toggle('active');
     }
 
+    // ===== Quantidade =====
     function changeQty(btn, delta) {
         const item = btn.closest('.flavor-item');
         const name = item.getAttribute('data-name');
         const emoji = item.getAttribute('data-emoji');
         const price = parseFloat(item.getAttribute('data-price'));
-        const qtyElement = item.querySelector('.qty');
-        
-        let currentQty = parseInt(qtyElement.innerText);
-        currentQty += delta;
+        const qtyEl = item.querySelector('.qty');
 
-        if (currentQty < 0) currentQty = 0;
-        qtyElement.innerText = currentQty;
+        let qty = parseInt(qtyEl.innerText) + delta;
+        if (qty < 0) qty = 0;
+        qtyEl.innerText = qty;
 
-        if (currentQty > 0) {
-            cart[name] = { qty: currentQty, price: price, emoji: emoji };
+        // Animação de bump
+        qtyEl.classList.remove('bump');
+        void qtyEl.offsetWidth;
+        qtyEl.classList.add('bump');
+
+        // Destaque no item
+        if (qty > 0) {
+            item.classList.add('selected');
+            cart[name] = { qty, price, emoji };
         } else {
+            item.classList.remove('selected');
             delete cart[name];
         }
 
         updateTotal();
+        updateCartSummary();
+        updateSendButton();
     }
 
+    // ===== Total =====
     function updateTotal() {
         let total = 0;
-        for (let key in cart) {
-            total += cart[key].qty * cart[key].price;
-        }
-        document.getElementById('total-value').innerText = total.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+        for (let k in cart) total += cart[k].qty * cart[k].price;
+        document.getElementById('total-value').innerText =
+            'R$ ' + total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
-    function sendWhatsApp() {
-        if (!checkStatus()) {
-            const confirmar = confirm("Estamos fora do horário de atendimento. O pedido pode demorar a ser visualizado. Deseja continuar?");
-            if (!confirmar) return;
+    // ===== Resumo do carrinho =====
+    function updateCartSummary() {
+        const summary = document.getElementById('cart-summary');
+        const keys = Object.keys(cart);
+        if (keys.length === 0) {
+            summary.innerHTML = '<span class="cart-empty-msg">Nenhum item selecionado ainda 🛒</span>';
+        } else {
+            summary.innerHTML = keys.map(k =>
+                `<span class="cart-chip">${cart[k].emoji} ${cart[k].qty}x ${k.replace(/Picolé de |Gelo Saborizado de |Cremosinho de /g, '')}</span>`
+            ).join('');
         }
+    }
 
+    // ===== Botão de envio =====
+    function updateSendButton() {
+        const btn = document.getElementById('btn-send');
+        const hasItems = Object.keys(cart).length > 0;
+        btn.classList.toggle('disabled', !hasItems);
+    }
+
+    // ===== Toast =====
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.innerText = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    // ===== Enviar WhatsApp =====
+    function sendWhatsApp() {
         if (Object.keys(cart).length === 0) {
-            alert("Selecione pelo menos um item!");
+            showToast('⚠️ Selecione pelo menos um item!');
             return;
         }
 
-        const payment = document.getElementById('payment-method').value;
-        let message = "*Novo Pedido - Souzanelli* ❄️\n\n";
-        let total = 0;
-
-        for (let key in cart) {
-            let subtotal = cart[key].qty * cart[key].price;
-            message += `${cart[key].emoji} *${cart[key].qty}x ${key}* - R$ ${subtotal.toFixed(2)}\n`;
-            total += subtotal;
+        const customerName = document.getElementById('customer-name').value.trim();
+        if (!customerName) {
+            showToast('✏️ Por favor, informe seu nome!');
+            document.getElementById('customer-name').focus();
+            return;
         }
 
-        message += `\n💰 *Pagamento:* ${payment}`;
-        message += `\n💵 *Total:* R$ ${total.toFixed(2)}`;
-        
-        if(payment === 'Pix') {
-            message += `\n\n*Dados para o Pix:*`;
-            message += `\n👤 Nome: Leandro dos Santos Soares`;
-            message += `\n🔑 Chave: 11971819948`;
+        if (!checkStatus()) {
+            const ok = confirm("Estamos fora do horário de atendimento (9h–18h).\nSeu pedido pode demorar a ser visualizado.\nDeseja enviar mesmo assim?");
+            if (!ok) return;
+        }
+
+        const payment = document.getElementById('payment-method').value;
+        let msg = `*Novo Pedido – Souzanelli* 🍦❄️\n`;
+        msg += `👤 *Cliente:* ${customerName}\n\n`;
+
+        let total = 0;
+        for (let k in cart) {
+            const sub = cart[k].qty * cart[k].price;
+            msg += `${cart[k].emoji} *${cart[k].qty}x ${k}* — R$ ${sub.toFixed(2).replace('.', ',')}\n`;
+            total += sub;
+        }
+
+        msg += `\n💰 *Pagamento:* ${payment}`;
+        msg += `\n💵 *Total:* R$ ${total.toFixed(2).replace('.', ',')}`;
+
+        if (payment === 'Pix') {
+            msg += `\n\n*Dados para o Pix:*`;
+            msg += `\n👤 Leandro dos Santos Soares`;
+            msg += `\n🔑 Chave: 11971819948`;
         }
 
         const phone = "5511971819948";
-        const encodedMsg = encodeURIComponent(message);
-        window.open(`https://wa.me/${phone}?text=${encodedMsg}`, '_blank');
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>
-
 </body>
 </html>

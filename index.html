@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souzanelli | Pedido Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gelo: #e0f7fa;
+            --azul-frio: #00daff;
+            --texto: #2c3e50;
+            --shadow-gelo: 0 0 15px #fff, 0 0 25px var(--azul-frio);
+        }
 
+        body {
+            margin: 0;
+            font-family: 'Fredoka', sans-serif;
+            background-color: var(--gelo);
+            color: var(--texto);
+            padding-bottom: 120px;
+        }
+
+        header {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 3rem; font-weight: 600; text-shadow: var(--shadow-gelo); margin-bottom: 5px; }
+        .logo span:nth-child(1) { color: #FF595E; } .logo span:nth-child(2) { color: #FF924C; }
+        .logo span:nth-child(3) { color: #FFCA3A; } .logo span:nth-child(4) { color: #8AC926; }
+        .logo span:nth-child(5) { color: #1982C4; } .logo span:nth-child(6) { color: #6A4C93; }
+        .logo span:nth-child(7) { color: #FF595E; } .logo span:nth-child(8) { color: #FF924C; }
+        .logo span:nth-child(9) { color: #FFCA3A; } .logo span:nth-child(10) { color: #8AC926; }
+
+        .container { max-width: 600px; margin: 20px auto; padding: 10px; }
+
+        .category-item { background: white; margin-bottom: 15px; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+        .category-header { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 1.2rem; font-weight: 600; }
+        .category-header::after { content: '▼'; font-size: 0.8rem; transition: 0.3s; color: var(--azul-frio); }
+        .active .category-header::after { transform: rotate(180deg); }
+
+        .flavor-list { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #fdfdfd; }
+        .active .flavor-list { max-height: 800px; }
+
+        .flavor-item {
+            padding: 15px 20px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flavor-info { display: flex; flex-direction: column; }
+        .flavor-name { font-weight: 600; }
+        .flavor-price { font-size: 0.9rem; color: #888; }
+
+        /* Controles de Quantidade */
+        .controls { display: flex; align-items: center; gap: 15px; }
+        .btn-qty {
+            width: 32px; height: 32px; border-radius: 50%; border: none;
+            background: var(--gelo); color: var(--texto);
+            font-size: 1.2rem; font-weight: bold; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .qty { font-weight: 600; min-width: 20px; text-align: center; }
+
+        /* Rodapé com Total */
+        .footer-cart {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: white; padding: 20px;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            z-index: 1000;
+        }
+
+        .total-info { font-size: 1.1rem; font-weight: 600; }
+
+        .btn-send {
+            background: #25d366; color: white; padding: 15px 30px;
+            border-radius: 50px; text-decoration: none; font-weight: 600;
+            width: 90%; max-width: 400px; text-align: center;
+            display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .btn-send:hover { background: #1ebd5b; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <span>S</span><span>o</span><span>u</span><span>z</span><span>a</span><span>n</span><span>e</span><span>l</span><span>l</span><span>i</span>
+    </div>
+    <p>❄️ Peça agora e refresque seu dia!</p>
+</header>
+
+<div class="container">
+    <div class="category-item">
+        <div class="category-header" onclick="toggleMenu(this)">🍦 Picolés Artesanais</div>
+        <div class="flavor-list">
+            <div class="flavor-item" data-name="Picolé de Limão" data-price="6.00">
+                <div class="flavor-info"><span class="flavor-name">Limão</span><span class="flavor-price">R$ 6,00</span></div>
+                <div class="controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <div class="flavor-item" data-name="Picolé de Morango" data-price="6.00">
+                <div class="flavor-info"><span class="flavor-name">Morango</span><span class="flavor-price">R$ 6,00</span></div>
+                <div class="controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-item">
+        <div class="category-header" onclick="toggleMenu(this)">🧊 Gelos Saborizados</div>
+        <div class="flavor-list">
+            <div class="flavor-item" data-name="Gelo de Maracujá" data-price="4.00">
+                <div class="flavor-info"><span class="flavor-name">Maracujá</span><span class="flavor-price">R$ 4,00</span></div>
+                <div class="controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-item">
+        <div class="category-header" onclick="toggleMenu(this)">😋 Cremosinho</div>
+        <div class="flavor-list">
+            <div class="flavor-item" data-name="Cremosinho de Coco" data-price="3.50">
+                <div class="flavor-info"><span class="flavor-name">Coco</span><span class="flavor-price">R$ 3.50</span></div>
+                <div class="controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer-cart">
+    <div class="total-info">Total: R$ <span id="total-value">0,00</span></div>
+    <a href="#" class="btn-send" onclick="sendWhatsApp()">
+        Enviar Pedido (WhatsApp) 📱
+    </a>
+</div>
+
+<script>
+    let cart = {};
+
+    function toggleMenu(header) {
+        header.parentElement.classList.toggle('active');
+    }
+
+    function changeQty(btn, delta) {
+        const item = btn.closest('.flavor-item');
+        const name = item.getAttribute('data-name');
+        const price = parseFloat(item.getAttribute('data-price'));
+        const qtyElement = item.querySelector('.qty');
+        
+        let currentQty = parseInt(qtyElement.innerText);
+        currentQty += delta;
+
+        if (currentQty < 0) currentQty = 0;
+        qtyElement.innerText = currentQty;
+
+        if (currentQty > 0) {
+            cart[name] = { qty: currentQty, price: price };
+        } else {
+            delete cart[name];
+        }
+
+        updateTotal();
+    }
+
+    function updateTotal() {
+        let total = 0;
+        for (let key in cart) {
+            total += cart[key].qty * cart[key].price;
+        }
+        document.getElementById('total-value').innerText = total.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    }
+
+    function sendWhatsApp() {
+        if (Object.keys(cart).length === 0) {
+            alert("Selecione pelo menos um item!");
+            return;
+        }
+
+        let message = "*Novo Pedido - Souzanelli* ❄️\n\n";
+        let total = 0;
+
+        for (let key in cart) {
+            let subtotal = cart[key].qty * cart[key].price;
+            message += `✅ ${cart[key].qty}x ${key} - R$ ${subtotal.toFixed(2)}\n`;
+            total += subtotal;
+        }
+
+        message += `\n*Total: R$ ${total.toFixed(2)}*`;
+        
+        const phone = "5511971819948";
+        const encodedMsg = encodeURIComponent(message);
+        window.open(`https://wa.me/${phone}?text=${encodedMsg}`, '_blank');
+    }
+</script>
+
+</body>
+</html>

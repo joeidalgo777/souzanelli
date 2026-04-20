@@ -18,7 +18,7 @@
             font-family: 'Fredoka', sans-serif;
             background-color: var(--gelo);
             color: var(--texto);
-            padding-bottom: 120px;
+            padding-bottom: 200px; /* Espaço para o rodapé do carrinho */
         }
 
         header {
@@ -56,7 +56,9 @@
             align-items: center;
         }
 
-        .flavor-info { display: flex; flex-direction: column; }
+        .flavor-info { display: flex; align-items: center; gap: 10px; }
+        .flavor-emoji { font-size: 1.5rem; }
+        .flavor-details { display: flex; flex-direction: column; }
         .flavor-name { font-weight: 600; }
         .flavor-price { font-size: 0.9rem; color: #888; }
 
@@ -70,13 +72,20 @@
         }
         .qty { font-weight: 600; min-width: 20px; text-align: center; }
 
-        /* Rodapé com Total */
+        /* Rodapé com Pagamento e Total */
         .footer-cart {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: white; padding: 20px;
+            background: white; padding: 15px;
             box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; align-items: center; gap: 10px;
             z-index: 1000;
+        }
+
+        .payment-box { width: 100%; max-width: 400px; margin-bottom: 5px; }
+        .payment-box select {
+            width: 100%; padding: 10px; border-radius: 10px;
+            border: 2px solid var(--gelo); font-family: 'Fredoka'; font-size: 1rem;
+            outline: none;
         }
 
         .total-info { font-size: 1.1rem; font-weight: 600; }
@@ -86,8 +95,8 @@
             border-radius: 50px; text-decoration: none; font-weight: 600;
             width: 90%; max-width: 400px; text-align: center;
             display: flex; justify-content: center; align-items: center; gap: 10px;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
         }
-        .btn-send:hover { background: #1ebd5b; }
     </style>
 </head>
 <body>
@@ -96,23 +105,40 @@
     <div class="logo">
         <span>S</span><span>o</span><span>u</span><span>z</span><span>a</span><span>n</span><span>e</span><span>l</span><span>l</span><span>i</span>
     </div>
-    <p>❄️ Peça agora e refresque seu dia!</p>
+    <p>❄️ Refresco com sabor de verdade!</p>
 </header>
 
 <div class="container">
     <div class="category-item">
         <div class="category-header" onclick="toggleMenu(this)">🍦 Picolés Artesanais</div>
         <div class="flavor-list">
-            <div class="flavor-item" data-name="Picolé de Limão" data-price="6.00">
-                <div class="flavor-info"><span class="flavor-name">Limão</span><span class="flavor-price">R$ 6,00</span></div>
+            <div class="flavor-item" data-name="Picolé de Limão" data-emoji="🍋" data-price="6.00">
+                <div class="flavor-info">
+                    <span class="flavor-emoji">🍋</span>
+                    <div class="flavor-details"><span class="flavor-name">Limão</span><span class="flavor-price">R$ 6,00</span></div>
+                </div>
                 <div class="controls">
                     <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
                     <span class="qty">0</span>
                     <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
                 </div>
             </div>
-            <div class="flavor-item" data-name="Picolé de Morango" data-price="6.00">
-                <div class="flavor-info"><span class="flavor-name">Morango</span><span class="flavor-price">R$ 6,00</span></div>
+            <div class="flavor-item" data-name="Picolé de Morango" data-emoji="🍓" data-price="6.00">
+                <div class="flavor-info">
+                    <span class="flavor-emoji">🍓</span>
+                    <div class="flavor-details"><span class="flavor-name">Morango</span><span class="flavor-price">R$ 6,00</span></div>
+                </div>
+                <div class="controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <div class="flavor-item" data-name="Picolé de Maracujá" data-emoji="🟡" data-price="6.00">
+                <div class="flavor-info">
+                    <span class="flavor-emoji">🟡</span>
+                    <div class="flavor-details"><span class="flavor-name">Maracujá</span><span class="flavor-price">R$ 6,00</span></div>
+                </div>
                 <div class="controls">
                     <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
                     <span class="qty">0</span>
@@ -125,8 +151,33 @@
     <div class="category-item">
         <div class="category-header" onclick="toggleMenu(this)">🧊 Gelos Saborizados</div>
         <div class="flavor-list">
-            <div class="flavor-item" data-name="Gelo de Maracujá" data-price="4.00">
-                <div class="flavor-info"><span class="flavor-name">Maracujá</span><span class="flavor-price">R$ 4,00</span></div>
+            <div class="flavor-item" data-name="Gelo de Limão" data-emoji="🍋" data-price="4.00">
+                <div class="flavor-info">
+                    <span class="flavor-emoji">🍋</span>
+                    <div class="flavor-details"><span class="flavor-name">Limão</span><span class="flavor-price">R$ 4,00</span></div>
+                </div>
+                <div class="controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <div class="flavor-item" data-name="Gelo de Morango" data-emoji="🍓" data-price="4.00">
+                <div class="flavor-info">
+                    <span class="flavor-emoji">🍓</span>
+                    <div class="flavor-details"><span class="flavor-name">Morango</span><span class="flavor-price">R$ 4,00</span></div>
+                </div>
+                <div class="controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <div class="flavor-item" data-name="Gelo de Maracujá" data-emoji="🟡" data-price="4.00">
+                <div class="flavor-info">
+                    <span class="flavor-emoji">🟡</span>
+                    <div class="flavor-details"><span class="flavor-name">Maracujá</span><span class="flavor-price">R$ 4,00</span></div>
+                </div>
                 <div class="controls">
                     <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
                     <span class="qty">0</span>
@@ -139,8 +190,33 @@
     <div class="category-item">
         <div class="category-header" onclick="toggleMenu(this)">😋 Cremosinho</div>
         <div class="flavor-list">
-            <div class="flavor-item" data-name="Cremosinho de Coco" data-price="3.50">
-                <div class="flavor-info"><span class="flavor-name">Coco</span><span class="flavor-price">R$ 3.50</span></div>
+            <div class="flavor-item" data-name="Cremosinho de Limão" data-emoji="🍋" data-price="3.50">
+                <div class="flavor-info">
+                    <span class="flavor-emoji">🍋</span>
+                    <div class="flavor-details"><span class="flavor-name">Limão</span><span class="flavor-price">R$ 3,50</span></div>
+                </div>
+                <div class="controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <div class="flavor-item" data-name="Cremosinho de Morango" data-emoji="🍓" data-price="3.50">
+                <div class="flavor-info">
+                    <span class="flavor-emoji">🍓</span>
+                    <div class="flavor-details"><span class="flavor-name">Morango</span><span class="flavor-price">R$ 3,50</span></div>
+                </div>
+                <div class="controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <div class="flavor-item" data-name="Cremosinho de Maracujá" data-emoji="🟡" data-price="3.50">
+                <div class="flavor-info">
+                    <span class="flavor-emoji">🟡</span>
+                    <div class="flavor-details"><span class="flavor-name">Maracujá</span><span class="flavor-price">R$ 3,50</span></div>
+                </div>
                 <div class="controls">
                     <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
                     <span class="qty">0</span>
@@ -152,6 +228,14 @@
 </div>
 
 <div class="footer-cart">
+    <div class="payment-box">
+        <label style="font-size: 0.8rem; font-weight: 600; margin-left: 5px;">Forma de Pagamento:</label>
+        <select id="payment-method">
+            <option value="Pix">Pix (Leandro S. Soares)</option>
+            <option value="Dinheiro">Dinheiro (Levar troco?)</option>
+            <option value="Cartão">Cartão (Maquininha)</option>
+        </select>
+    </div>
     <div class="total-info">Total: R$ <span id="total-value">0,00</span></div>
     <a href="#" class="btn-send" onclick="sendWhatsApp()">
         Enviar Pedido (WhatsApp) 📱
@@ -168,6 +252,7 @@
     function changeQty(btn, delta) {
         const item = btn.closest('.flavor-item');
         const name = item.getAttribute('data-name');
+        const emoji = item.getAttribute('data-emoji');
         const price = parseFloat(item.getAttribute('data-price'));
         const qtyElement = item.querySelector('.qty');
         
@@ -178,7 +263,7 @@
         qtyElement.innerText = currentQty;
 
         if (currentQty > 0) {
-            cart[name] = { qty: currentQty, price: price };
+            cart[name] = { qty: currentQty, price: price, emoji: emoji };
         } else {
             delete cart[name];
         }
@@ -200,17 +285,25 @@
             return;
         }
 
+        const payment = document.getElementById('payment-method').value;
         let message = "*Novo Pedido - Souzanelli* ❄️\n\n";
         let total = 0;
 
         for (let key in cart) {
             let subtotal = cart[key].qty * cart[key].price;
-            message += `✅ ${cart[key].qty}x ${key} - R$ ${subtotal.toFixed(2)}\n`;
+            message += `${cart[key].emoji} *${cart[key].qty}x ${key}* - R$ ${subtotal.toFixed(2)}\n`;
             total += subtotal;
         }
 
-        message += `\n*Total: R$ ${total.toFixed(2)}*`;
+        message += `\n💰 *Pagamento:* ${payment}`;
+        message += `\n💵 *Total:* R$ ${total.toFixed(2)}`;
         
+        if(payment === 'Pix') {
+            message += `\n\n*Dados para o Pix:*`;
+            message += `\n👤 Nome: Leandro dos Santos Soares`;
+            message += `\n🔑 Chave: 11971819948`;
+        }
+
         const phone = "5511971819948";
         const encodedMsg = encodeURIComponent(message);
         window.open(`https://wa.me/${phone}?text=${encodedMsg}`, '_blank');

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🍦 Souzanelli | Pedido Online</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍦</text></svg>">
+    <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍦</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <style>
@@ -38,24 +40,105 @@
 
         /* ===== HEADER ===== */
         header {
-            background:var(--branco); padding:28px 20px 24px; text-align:center;
-            border-bottom-left-radius:40px; border-bottom-right-radius:40px;
-            box-shadow:0 6px 30px rgba(0,150,199,0.1); position:relative; z-index:10;
+            background: var(--branco);
+            padding: 36px 20px 28px;
+            text-align: center;
+            border-bottom-left-radius: 44px;
+            border-bottom-right-radius: 44px;
+            box-shadow: 0 6px 40px rgba(0,150,199,0.13);
+            position: relative; z-index: 10;
+            overflow: hidden;
         }
-        .logo-wrapper { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:4px; }
-        .logo-icon { font-size:2.8rem; animation:balance 3s ease-in-out infinite; display:inline-block; }
-        @keyframes balance { 0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg)} }
-        .logo { font-family:'Fredoka',sans-serif; font-size:2.8rem; font-weight:700; letter-spacing:1px; }
-        .logo span:nth-child(1){color:#FF595E}.logo span:nth-child(2){color:#FF924C}
-        .logo span:nth-child(3){color:#FFCA3A}.logo span:nth-child(4){color:#8AC926}
-        .logo span:nth-child(5){color:#1982C4}.logo span:nth-child(6){color:#6A4C93}
-        .logo span:nth-child(7){color:#FF595E}.logo span:nth-child(8){color:#FF924C}
-        .logo span:nth-child(9){color:#FFCA3A}.logo span:nth-child(10){color:#8AC926}
-        .tagline { font-size:0.85rem; color:var(--texto-leve); margin-bottom:14px; letter-spacing:0.5px; }
+
+        /* bolhas decorativas no header */
+        header::before {
+            content: '';
+            position: absolute; top: -40px; left: -40px;
+            width: 160px; height: 160px;
+            background: radial-gradient(circle, rgba(0,200,240,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        header::after {
+            content: '';
+            position: absolute; bottom: -30px; right: -30px;
+            width: 180px; height: 180px;
+            background: radial-gradient(circle, rgba(255,107,157,0.07) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* flocos/bolinhas decorativas */
+        .header-deco {
+            position: absolute; pointer-events: none; font-size: 1.4rem;
+            opacity: 0.18; animation: floatDeco 6s ease-in-out infinite;
+        }
+        .header-deco:nth-child(1) { top: 12px; left: 8%;  animation-delay: 0s;   font-size: 1.2rem; }
+        .header-deco:nth-child(2) { top: 20px; right: 10%; animation-delay: 1.2s; font-size: 1rem;   }
+        .header-deco:nth-child(3) { bottom: 18px; left: 14%; animation-delay: 2s; font-size: 0.9rem; }
+        .header-deco:nth-child(4) { bottom: 14px; right: 8%; animation-delay: 0.6s; font-size: 1.1rem; }
+        .header-deco:nth-child(5) { top: 50%; left: 3%;  animation-delay: 1.8s; font-size: 0.8rem; }
+        .header-deco:nth-child(6) { top: 40%; right: 4%; animation-delay: 3s;   font-size: 0.85rem; }
+        @keyframes floatDeco {
+            0%,100% { transform: translateY(0) rotate(0deg); }
+            50%      { transform: translateY(-8px) rotate(10deg); }
+        }
+
+        .logo-wrapper {
+            display: flex; align-items: center; justify-content: center;
+            gap: 14px; margin-bottom: 6px; position: relative; z-index: 1;
+        }
+        .logo-icon {
+            font-size: 3rem;
+            animation: balance 3s ease-in-out infinite;
+            display: inline-block;
+            filter: drop-shadow(0 4px 8px rgba(0,150,199,0.2));
+        }
+        @keyframes balance { 0%,100%{transform:rotate(-6deg) translateY(0)} 50%{transform:rotate(6deg) translateY(-4px)} }
+
+        .logo {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3rem; font-weight: 700; letter-spacing: 2px;
+            position: relative;
+        }
+        /* cada letra sobe com delay crescente */
+        .logo span {
+            display: inline-block;
+            animation: letterBounce 2.4s ease-in-out infinite;
+        }
+        .logo span:nth-child(1)  { color:#FF595E; animation-delay:0s; }
+        .logo span:nth-child(2)  { color:#FF924C; animation-delay:.08s; }
+        .logo span:nth-child(3)  { color:#FFCA3A; animation-delay:.16s; }
+        .logo span:nth-child(4)  { color:#8AC926; animation-delay:.24s; }
+        .logo span:nth-child(5)  { color:#1982C4; animation-delay:.32s; }
+        .logo span:nth-child(6)  { color:#6A4C93; animation-delay:.40s; }
+        .logo span:nth-child(7)  { color:#FF595E; animation-delay:.48s; }
+        .logo span:nth-child(8)  { color:#FF924C; animation-delay:.56s; }
+        .logo span:nth-child(9)  { color:#FFCA3A; animation-delay:.64s; }
+        .logo span:nth-child(10) { color:#8AC926; animation-delay:.72s; }
+        @keyframes letterBounce {
+            0%,60%,100% { transform: translateY(0); }
+            30%          { transform: translateY(-7px); }
+        }
+
+        /* linha decorativa sob o logo */
+        .logo-underline {
+            height: 3px; width: 60px; margin: 6px auto 10px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #FF595E, #FFCA3A, #1982C4, #8AC926);
+            position: relative; z-index: 1;
+        }
+
+        .tagline {
+            font-size: 0.85rem; color: var(--texto-leve);
+            margin-bottom: 16px; letter-spacing: 1px;
+            position: relative; z-index: 1;
+        }
         .info-box {
-            background:linear-gradient(135deg,#f0fbff,#e8f4fd); margin:0 auto;
-            padding:14px 18px; border-radius:16px; max-width:460px;
-            font-size:0.88rem; line-height:1.7; border:1.5px dashed rgba(0,200,240,0.4);
+            background: linear-gradient(135deg,#f0fbff,#e8f4fd); margin: 0 auto;
+            padding: 14px 18px; border-radius: 16px; max-width: 460px;
+            font-size: 0.88rem; line-height: 1.7; border: 1.5px dashed rgba(0,200,240,0.4);
+            position: relative; z-index: 1;
         }
         .info-box a { color:var(--azul-escuro); text-decoration:none; font-weight:700; }
         .info-box a:hover { text-decoration:underline; }
@@ -154,7 +237,7 @@
         .flavor-price { font-size:0.82rem; font-weight:700; color:var(--azul-escuro); margin-top:2px; }
 
         /* ===== CONTROLES ===== */
-        .controls { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+        .controls { display:flex; align-items:center; gap:8px; flex-shrink:0; }
         .btn-qty {
             width:34px; height:34px; border-radius:50%; border:none; cursor:pointer;
             display:flex; align-items:center; justify-content:center;
@@ -165,9 +248,23 @@
         .btn-plus  { background:var(--azul-frio); color:white; }
         .btn-plus:hover  { background:var(--azul-escuro); transform:scale(1.1); }
         .btn-plus:active { transform:scale(0.95); }
-        .qty { font-family:'Fredoka',sans-serif; font-weight:700; font-size:1.1rem; min-width:22px; text-align:center; }
-        .qty.bump { animation:bump 0.2s ease-out; }
-        @keyframes bump { 0%{transform:scale(1)} 50%{transform:scale(1.4)} 100%{transform:scale(1)} }
+
+        /* input editável de quantidade */
+        .qty-input {
+            font-family:'Fredoka',sans-serif; font-weight:700; font-size:1rem;
+            width:44px; text-align:center;
+            border: 2px solid #e0eff7; border-radius:10px;
+            padding: 4px 0;
+            background: #f8fcff; color:var(--texto);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            -moz-appearance: textfield;
+        }
+        .qty-input::-webkit-outer-spin-button,
+        .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .qty-input:focus { border-color: var(--azul-frio); box-shadow: 0 0 0 3px rgba(0,200,240,0.12); }
+        .qty-input.bump { animation:bump 0.2s ease-out; }
+        @keyframes bump { 0%{transform:scale(1)} 50%{transform:scale(1.15)} 100%{transform:scale(1)} }
 
         /* ===== FOOTER MOBILE ===== */
         .footer-cart {
@@ -361,6 +458,61 @@
             font-size:0.76rem; color:#0a7d52; text-align:center; line-height:1.6; opacity:0.75;
         }
 
+        /* ===== BANNER DESCONTO PIX ===== */
+        .desconto-banner {
+            display: none;
+            max-width: 980px;
+            margin: 16px auto 0;
+            padding: 0 14px;
+            position: relative; z-index: 1;
+        }
+        .desconto-banner.visible { display: block; }
+        @media (min-width: 768px) {
+            .desconto-banner { padding: 0 24px; margin-top: 20px; }
+        }
+
+        .desconto-inner {
+            background: linear-gradient(135deg, #fff8e1, #fff3cd);
+            border: 2px solid #ffc107;
+            border-radius: 16px;
+            padding: 14px 18px;
+            display: flex; align-items: center; gap: 14px;
+            box-shadow: 0 4px 20px rgba(255,193,7,0.2);
+            animation: slideUp 0.4s ease-out;
+        }
+        .desconto-icon { font-size: 1.8rem; flex-shrink: 0; }
+        .desconto-texto { flex: 1; }
+        .desconto-titulo {
+            font-family: 'Fredoka', sans-serif; font-size: 0.95rem; font-weight: 700;
+            color: #7a4f00; margin-bottom: 2px;
+        }
+        .desconto-detalhe { font-size: 0.8rem; color: #9a6700; line-height: 1.4; }
+        .desconto-badge {
+            background: #ffc107; color: #5c3700;
+            font-family: 'Fredoka', sans-serif; font-size: 1.1rem; font-weight: 700;
+            padding: 6px 14px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(255,193,7,0.4);
+            transition: all 0.3s;
+        }
+        .desconto-badge.ativo-10 { background: #ff9800; color: white; font-size: 1.3rem; }
+
+        /* ===== DESCONTO NO MODAL ===== */
+        .modal-desconto {
+            display: none;
+            background: linear-gradient(135deg, #fff8e1, #fff3cd);
+            border: 2px solid #ffc107;
+            border-radius: 14px;
+            padding: 12px 16px;
+            text-align: center;
+            animation: chipIn 0.3s ease-out;
+        }
+        .modal-desconto.visible { display: block; }
+        .modal-desc-label { font-size: 0.75rem; color: #9a6700; font-weight: 700; margin-bottom: 4px; }
+        .modal-desc-row { display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .modal-desc-antes { font-size: 0.9rem; color: #bbb; text-decoration: line-through; }
+        .modal-desc-pct { background: #ffc107; color: #5c3700; font-family: 'Fredoka', sans-serif; font-size: 0.85rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; }
+        .modal-desc-depois { font-family: 'Fredoka', sans-serif; font-size: 1.4rem; font-weight: 700; color: #0a7d52; }
+
         /* ===== TOAST ===== */
         .toast {
             position:fixed; top:20px; left:50%;
@@ -377,10 +529,19 @@
 
 <!-- ===== HEADER ===== -->
 <header>
+    <!-- flocos decorativos -->
+    <span class="header-deco">🍦</span>
+    <span class="header-deco">🧊</span>
+    <span class="header-deco">🍓</span>
+    <span class="header-deco">🍋</span>
+    <span class="header-deco">🌼</span>
+    <span class="header-deco">❄️</span>
+
     <div class="logo-wrapper">
         <span class="logo-icon">🍦</span>
         <div class="logo"><span>S</span><span>o</span><span>u</span><span>z</span><span>a</span><span>n</span><span>e</span><span>l</span><span>l</span><span>i</span></div>
     </div>
+    <div class="logo-underline"></div>
     <div class="tagline">Picolés & Gelados Artesanais 🧊</div>
     <div class="info-box">
         📍 <a href="https://www.google.com/maps/search/Sorvetes+Souzanelli+R.+Sen.+Feij%C3%B3+55+Vila+Operaria+Biritiba+Mirim+SP" target="_blank">R. Sen. Feijó, 55 – Biritiba Mirim / SP</a><br>
@@ -388,6 +549,18 @@
         <div id="shop-status" class="status-badge">Verificando horário...</div>
     </div>
 </header>
+
+<!-- ===== BANNER DESCONTO PIX ===== -->
+<div class="desconto-banner" id="desconto-banner">
+    <div class="desconto-inner">
+        <div class="desconto-icon">🏷️</div>
+        <div class="desconto-texto">
+            <div class="desconto-titulo" id="desconto-titulo">Desconto Pix para atacado!</div>
+            <div class="desconto-detalhe">+50 Picolés Artesanais = 5% off &nbsp;·&nbsp; +100 Picolés = 10% off</div>
+        </div>
+        <div class="desconto-badge" id="desconto-badge">–%</div>
+    </div>
+</div>
 
 <!-- ===== PAGE LAYOUT ===== -->
 <div class="page-layout">
@@ -411,15 +584,15 @@
             <div class="flavor-list">
                 <div class="flavor-item" data-name="Picolé de Limão" data-emoji="🍋" data-price="6.00">
                     <div class="flavor-info"><div class="flavor-emoji">🍋</div><div class="flavor-details"><span class="flavor-name">Limão</span><span class="flavor-desc">Refrescante e azedinho</span><span class="flavor-price">R$ 6,00</span></div></div>
-                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><span class="qty">0</span><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
+                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><input type="number" class="qty-input" value="0" min="0" max="9999" oninput="changeQtyInput(this)" onblur="sanitizeInput(this)"><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
                 </div>
                 <div class="flavor-item" data-name="Picolé de Morango" data-emoji="🍓" data-price="6.00">
                     <div class="flavor-info"><div class="flavor-emoji">🍓</div><div class="flavor-details"><span class="flavor-name">Morango</span><span class="flavor-desc">Docinho e frutado</span><span class="flavor-price">R$ 6,00</span></div></div>
-                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><span class="qty">0</span><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
+                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><input type="number" class="qty-input" value="0" min="0" max="9999" oninput="changeQtyInput(this)" onblur="sanitizeInput(this)"><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
                 </div>
                 <div class="flavor-item" data-name="Picolé de Maracujá" data-emoji="🌼" data-price="6.00">
                     <div class="flavor-info"><div class="flavor-emoji">🌼</div><div class="flavor-details"><span class="flavor-name">Maracujá</span><span class="flavor-desc">Tropical e equilibrado</span><span class="flavor-price">R$ 6,00</span></div></div>
-                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><span class="qty">0</span><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
+                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><input type="number" class="qty-input" value="0" min="0" max="9999" oninput="changeQtyInput(this)" onblur="sanitizeInput(this)"><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
                 </div>
             </div>
         </div>
@@ -433,15 +606,15 @@
             <div class="flavor-list">
                 <div class="flavor-item" data-name="Gelo Saborizado de Limão" data-emoji="🍋" data-price="4.00">
                     <div class="flavor-info"><div class="flavor-emoji">🍋</div><div class="flavor-details"><span class="flavor-name">Limão</span><span class="flavor-desc">Geladinho e azedinho</span><span class="flavor-price">R$ 4,00</span></div></div>
-                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><span class="qty">0</span><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
+                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><input type="number" class="qty-input" value="0" min="0" max="9999" oninput="changeQtyInput(this)" onblur="sanitizeInput(this)"><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
                 </div>
                 <div class="flavor-item" data-name="Gelo Saborizado de Morango" data-emoji="🍓" data-price="4.00">
                     <div class="flavor-info"><div class="flavor-emoji">🍓</div><div class="flavor-details"><span class="flavor-name">Morango</span><span class="flavor-desc">Gelado e frutado</span><span class="flavor-price">R$ 4,00</span></div></div>
-                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><span class="qty">0</span><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
+                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><input type="number" class="qty-input" value="0" min="0" max="9999" oninput="changeQtyInput(this)" onblur="sanitizeInput(this)"><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
                 </div>
                 <div class="flavor-item" data-name="Gelo Saborizado de Maracujá" data-emoji="🌼" data-price="4.00">
                     <div class="flavor-info"><div class="flavor-emoji">🌼</div><div class="flavor-details"><span class="flavor-name">Maracujá</span><span class="flavor-desc">Tropical e refrescante</span><span class="flavor-price">R$ 4,00</span></div></div>
-                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><span class="qty">0</span><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
+                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><input type="number" class="qty-input" value="0" min="0" max="9999" oninput="changeQtyInput(this)" onblur="sanitizeInput(this)"><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
                 </div>
             </div>
         </div>
@@ -455,15 +628,15 @@
             <div class="flavor-list">
                 <div class="flavor-item" data-name="Cremosinho de Limão" data-emoji="🍋" data-price="3.50">
                     <div class="flavor-info"><div class="flavor-emoji">🍋</div><div class="flavor-details"><span class="flavor-name">Limão</span><span class="flavor-desc">Cremoso e refrescante</span><span class="flavor-price">R$ 3,50</span></div></div>
-                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><span class="qty">0</span><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
+                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><input type="number" class="qty-input" value="0" min="0" max="9999" oninput="changeQtyInput(this)" onblur="sanitizeInput(this)"><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
                 </div>
                 <div class="flavor-item" data-name="Cremosinho de Morango" data-emoji="🍓" data-price="3.50">
                     <div class="flavor-info"><div class="flavor-emoji">🍓</div><div class="flavor-details"><span class="flavor-name">Morango</span><span class="flavor-desc">Cremoso e frutado</span><span class="flavor-price">R$ 3,50</span></div></div>
-                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><span class="qty">0</span><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
+                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><input type="number" class="qty-input" value="0" min="0" max="9999" oninput="changeQtyInput(this)" onblur="sanitizeInput(this)"><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
                 </div>
                 <div class="flavor-item" data-name="Cremosinho de Maracujá" data-emoji="🌼" data-price="3.50">
                     <div class="flavor-info"><div class="flavor-emoji">🌼</div><div class="flavor-details"><span class="flavor-name">Maracujá</span><span class="flavor-desc">Cremoso e tropical</span><span class="flavor-price">R$ 3,50</span></div></div>
-                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><span class="qty">0</span><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
+                    <div class="controls"><button class="btn-qty btn-minus" onclick="changeQty(this,-1)">−</button><input type="number" class="qty-input" value="0" min="0" max="9999" oninput="changeQtyInput(this)" onblur="sanitizeInput(this)"><button class="btn-qty btn-plus" onclick="changeQty(this,1)">+</button></div>
                 </div>
             </div>
         </div>
@@ -483,7 +656,7 @@
             </div>
             <div class="desktop-payment">
                 <label>💳 Forma de Pagamento</label>
-                <select id="payment-method-desktop">
+                <select id="payment-method-desktop" onchange="atualizarBannerDesconto()">
                     <option value="Pix">💸 Pix — Leandro S. Soares</option>
                     <option value="Dinheiro">💵 Dinheiro (levar troco?)</option>
                     <option value="Cartão">💳 Cartão (maquininha)</option>
@@ -504,7 +677,7 @@
     </div>
     <div class="footer-bottom">
         <div class="footer-row">
-            <select class="payment-select" id="payment-method">
+            <select class="payment-select" id="payment-method" onchange="atualizarBannerDesconto()">
                 <option value="Pix">💸 Pix — Leandro S. Soares</option>
                 <option value="Dinheiro">💵 Dinheiro (levar troco?)</option>
                 <option value="Cartão">💳 Cartão (maquininha)</option>
@@ -528,6 +701,14 @@
         <div class="modal-body">
             <div class="pix-valor-wrap">
                 <div class="pix-valor-label">VALOR A PAGAR</div>
+                <div class="modal-desconto" id="modal-desconto">
+                    <div class="modal-desc-label">🏷️ DESCONTO PIX APLICADO</div>
+                    <div class="modal-desc-row">
+                        <span class="modal-desc-antes" id="modal-antes"></span>
+                        <span class="modal-desc-pct" id="modal-pct"></span>
+                        <span class="modal-desc-depois" id="modal-depois"></span>
+                    </div>
+                </div>
                 <div class="pix-valor" id="modal-pix-valor">R$ 0,00</div>
             </div>
 
@@ -604,8 +785,63 @@
     }
 
     // =========================================
-    //  ESTADO
+    //  DESCONTO PIX POR QUANTIDADE DE PICOLÉS
     // =========================================
+    function getQtdPicoles() {
+        let total = 0;
+        for (let k in cart) {
+            if (k.startsWith('Picolé')) total += cart[k].qty;
+        }
+        return total;
+    }
+
+    function getDesconto() {
+        const qtd = getQtdPicoles();
+        if (qtd >= 100) return 0.10;
+        if (qtd >= 50)  return 0.05;
+        return 0;
+    }
+
+    function getTotalComDesconto() {
+        const total    = getTotal();
+        const desconto = getDesconto();
+        return { bruto: total, pct: desconto, liquido: total * (1 - desconto) };
+    }
+
+    function atualizarBannerDesconto() {
+        const payDesk = document.getElementById('payment-method-desktop').value;
+        const payMob  = document.getElementById('payment-method').value;
+        const isPix   = payDesk === 'Pix' || payMob === 'Pix';
+        const qtd     = getQtdPicoles();
+        const banner  = document.getElementById('desconto-banner');
+        const badge   = document.getElementById('desconto-badge');
+        const titulo  = document.getElementById('desconto-titulo');
+
+        // Banner aparece sempre que for Pix (como lembrete), fica destacado quando ativo
+        if (isPix) {
+            banner.classList.add('visible');
+            if (qtd >= 100) {
+                badge.textContent = '–10%';
+                badge.className = 'desconto-badge ativo-10';
+                titulo.textContent = '🎉 Desconto de 10% aplicado!';
+            } else if (qtd >= 50) {
+                badge.textContent = '–5%';
+                badge.className = 'desconto-badge';
+                titulo.textContent = '🎉 Desconto de 5% aplicado!';
+            } else if (qtd > 0) {
+                const faltam = 50 - qtd;
+                badge.textContent = qtd >= 1 ? `faltam ${faltam}` : '–%';
+                badge.className = 'desconto-badge';
+                titulo.textContent = 'Desconto Pix para atacado!';
+            } else {
+                badge.textContent = '–%';
+                badge.className = 'desconto-badge';
+                titulo.textContent = 'Desconto Pix para atacado!';
+            }
+        } else {
+            banner.classList.remove('visible');
+        }
+    }
     let cart = {};
     let pixPayload = '';
     let pendingWhatsApp = '';
@@ -624,21 +860,41 @@
         }
     }
     checkStatus();
+    atualizarBannerDesconto();
 
     function toggleMenu(header) { header.parentElement.classList.toggle('active'); }
 
     function changeQty(btn, delta) {
-        const item  = btn.closest('.flavor-item');
+        const item   = btn.closest('.flavor-item');
+        const name   = item.getAttribute('data-name');
+        const emoji  = item.getAttribute('data-emoji');
+        const price  = parseFloat(item.getAttribute('data-price'));
+        const input  = item.querySelector('.qty-input');
+        let qty = Math.max(0, parseInt(input.value || 0) + delta);
+        input.value = qty;
+        input.classList.remove('bump');
+        void input.offsetWidth;
+        input.classList.add('bump');
+        updateCartItem(item, name, emoji, price, qty);
+    }
+
+    function changeQtyInput(input) {
+        const item  = input.closest('.flavor-item');
         const name  = item.getAttribute('data-name');
         const emoji = item.getAttribute('data-emoji');
         const price = parseFloat(item.getAttribute('data-price'));
-        const qtyEl = item.querySelector('.qty');
-        let qty = parseInt(qtyEl.innerText) + delta;
+        let qty = parseInt(input.value) || 0;
+        if (qty < 0) { qty = 0; input.value = 0; }
+        updateCartItem(item, name, emoji, price, qty);
+    }
+
+    function sanitizeInput(input) {
+        let qty = parseInt(input.value) || 0;
         if (qty < 0) qty = 0;
-        qtyEl.innerText = qty;
-        qtyEl.classList.remove('bump');
-        void qtyEl.offsetWidth;
-        qtyEl.classList.add('bump');
+        input.value = qty;
+    }
+
+    function updateCartItem(item, name, emoji, price, qty) {
         if (qty > 0) { item.classList.add('selected'); cart[name] = { qty, price, emoji }; }
         else          { item.classList.remove('selected'); delete cart[name]; }
         updateAll();
@@ -685,6 +941,8 @@
                     <span class="dci-sub">R$ ${sub}</span></div>`;
               }).join('')
             : '<div class="desktop-empty">Nenhum item ainda 🍦</div>';
+
+        atualizarBannerDesconto();
     }
 
     // =========================================
@@ -704,21 +962,24 @@
         const payment = document.getElementById(payId).value;
 
         // Monta mensagem do WhatsApp
-        const total = getTotal();
+        const { bruto, pct, liquido } = getTotalComDesconto();
         let msg = `*Novo Pedido – Souzanelli* 🍦❄️\n👤 *Cliente:* ${name}\n\n`;
         for (let k in cart) {
             const sub = cart[k].qty * cart[k].price;
             msg += `${cart[k].emoji} *${cart[k].qty}x ${k}* — R$ ${sub.toFixed(2).replace('.',',')}\n`;
         }
         msg += `\n💰 *Pagamento:* ${payment}`;
-        msg += `\n💵 *Total:* R$ ${total.toFixed(2).replace('.',',')}`;
+        if (payment === 'Pix' && pct > 0) {
+            msg += `\n🏷️ *Desconto Pix (${pct*100}%):* –R$ ${(bruto - liquido).toFixed(2).replace('.',',')}`;
+            msg += `\n💵 *Total com desconto:* R$ ${liquido.toFixed(2).replace('.',',')}`;
+        } else {
+            msg += `\n💵 *Total:* R$ ${bruto.toFixed(2).replace('.',',')}`;
+        }
 
         if (payment === 'Pix') {
             msg += `\n\n✅ *Pix enviado!*\n_(Comprovante em anexo)_`;
-            // Abre modal Pix
-            abrirModalPix(total, msg);
+            abrirModalPix(payment === 'Pix' && pct > 0 ? liquido : bruto, bruto, pct, msg);
         } else {
-            // Outros pagamentos: direto pro WhatsApp
             window.open(`https://wa.me/5511971819948?text=${encodeURIComponent(msg)}`, '_blank');
         }
     }
@@ -726,11 +987,23 @@
     // =========================================
     //  MODAL PIX
     // =========================================
-    function abrirModalPix(total, whatsappMsg) {
-        pixPayload   = gerarPixPayload(total);
+    function abrirModalPix(valorFinal, bruto, pct, whatsappMsg) {
+        pixPayload      = gerarPixPayload(valorFinal);
         pendingWhatsApp = whatsappMsg;
 
-        document.getElementById('modal-pix-valor').innerText = fmtBRL(total);
+        // Desconto no modal
+        const descEl = document.getElementById('modal-desconto');
+        if (pct > 0) {
+            descEl.classList.add('visible');
+            document.getElementById('modal-antes').innerText  = fmtBRL(bruto);
+            document.getElementById('modal-pct').innerText    = `–${pct*100}%`;
+            document.getElementById('modal-depois').innerText = fmtBRL(valorFinal);
+        } else {
+            descEl.classList.remove('visible');
+        }
+
+        document.getElementById('modal-pix-valor').innerText  = fmtBRL(valorFinal);
+        document.getElementById('modal-pix-valor').style.display = pct > 0 ? 'none' : 'block';
         document.getElementById('modal-pix-codigo').innerText = pixPayload;
 
         // Gera QR com qrious
